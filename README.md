@@ -7,3 +7,6 @@
 
 #### SSA
   - https://github.com/golang/tools/blob/master/go/ssa/example_test.go
+
+## License
+[MIT](LICENSE)
