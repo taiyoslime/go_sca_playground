@@ -47,7 +47,6 @@ func main() {
 	a := ex1(1) + ex2(1, 1) + x.ex3() + y + z + ex5() + ex6(1)
 	fmt.Println(a)
 }
-
 `
 
 func main() {
@@ -71,47 +70,42 @@ func main() {
 		}
 
 		funcName := decl.Name
-		fmt.Printf("> function name\n%s\n", funcName)
-
 		params := decl.Type.Params
-		fmt.Println("> arguments")
-		if params != nil && params.List != nil {
-			for i := range params.List {
-				for _, name := range params.List[i].Names {
-					fmt.Printf("%s ", name)
-				}
-				fmt.Printf(": %s\n", params.List[i].Type)
-			}
-		} else {
-			fmt.Println("None")
-		}
-
 		recv := decl.Recv
-		if recv != nil && recv.List != nil {
-			fmt.Println("> receiver")
-			for i := range recv.List {
-				for _, name := range recv.List[i].Names {
-					fmt.Printf("%s ", name)
+		results := decl.Type.Results
+
+		if recv != nil {
+			fmt.Printf("> method name\n%s\n", funcName)
+		} else {
+			fmt.Printf("> function name\n%s\n", funcName)
+		}
+
+		printFieldList := func(list *ast.FieldList) {
+			if list != nil && list.List != nil {
+				for i := range list.List {
+					for _, name := range list.List[i].Names {
+						fmt.Printf("%s ", name)
+					}
+					if len(list.List[i].Names) == 0 {
+						fmt.Print("(Anonymus)")
+					}
+					fmt.Printf(": %s\n", list.List[i].Type)
 				}
-				fmt.Printf(": %s\n", recv.List[i].Type)
+			} else {
+				fmt.Println("None")
 			}
 		}
 
-		results := decl.Type.Results
-		fmt.Println("> return values")
-		if results != nil && results.List != nil {
-			for i := range results.List {
-				for _, name := range results.List[i].Names {
-					fmt.Printf("%s ", name)
-				}
-				if len(results.List[i].Names) == 0 {
-					fmt.Print("(Anonymus)")
-				}
-				fmt.Printf(": %s\n", results.List[i].Type)
-			}
-		} else {
-			fmt.Println("None")
+		fmt.Println("> arguments")
+		printFieldList(params)
+
+		if recv != nil {
+			fmt.Println("> receivers")
+			printFieldList(recv)
 		}
+
+		fmt.Println("> return values")
+		printFieldList(results)
 
 		fmt.Println()
 
