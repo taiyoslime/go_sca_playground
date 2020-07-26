@@ -1,4 +1,4 @@
-# go_tools_playground
+# go_sca_playground
 
 ## Reference
 - 静的解析をはじめよう - Gopherをさがせ！, https://golangtokyo.github.io/codelab/find-gophers/ 
