@@ -7,8 +7,8 @@ package main
 import (
 	"strings"
 
-	"intexpr"
 	"golang.org/x/tools/go/analysis"
+	"intexpr"
 )
 
 // flags for Analyzer.Flag.
@@ -33,4 +33,3 @@ func (analyzerPlugin) GetAnalyzers() []*analysis.Analyzer {
 		intexpr.Analyzer,
 	}
 }
-

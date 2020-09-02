@@ -7,7 +7,7 @@ func f() {
 	print(gopher)
 }
 
-func g() int{
+func g() int {
 	a := 1
 	return a + 1
 }

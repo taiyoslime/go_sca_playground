@@ -29,12 +29,11 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		switch n := n.(type) {
 		case ast.Expr:
 			typ := pass.TypesInfo.TypeOf(n)
-			if types.Identical(typ, types.Typ[types.Int]) || types.Identical(typ, types.Typ[types.UntypedInt]){
-				fmt.Println(pass.Fset.Position(n.Pos()))
+			if types.Identical(typ, types.Typ[types.Int]) || types.Identical(typ, types.Typ[types.UntypedInt]) {
+				fmt.Println(types.ExprString(n), pass.Fset.Position(n.Pos()))
 			}
 		}
 	})
 
 	return nil, nil
 }
-
